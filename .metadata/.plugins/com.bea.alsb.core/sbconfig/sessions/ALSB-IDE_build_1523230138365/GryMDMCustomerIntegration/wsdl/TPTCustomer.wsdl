@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="CompanyService" targetNamespace="http://schema.greenergy.com/MDM/clients/TPT" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:i0="http://tempuri.org/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://schema.greenergy.com/MDM/clients/TPT" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified" targetNamespace="http://schema.greenergy.com/MDM/clients/TPT" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="PutCompany">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="company" nillable="true" type="tns:company"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="company">
+				<xs:sequence>
+					<xs:element name="CompanyId" type="xs:long"/>
+					<xs:element name="ParentCompanyId" type="xs:long"/>
+					<xs:element name="CompanyName" nillable="true" type="xs:string"/>
+					<xs:element name="CompanyCode" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="CompanyLegalName" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="companies" nillable="true" type="tns:companies"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="company" nillable="true" type="tns:company"/>
+			<xs:complexType name="companies">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="company" nillable="true" type="tns:company"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="companies" nillable="true" type="tns:companies"/>
+			<xs:element name="PutCompanyResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="PutCompanyResult" nillable="true" type="tns:CompanyResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="CompanyResponse">
+				<xs:sequence>
+					<xs:element name="Company" nillable="true" type="tns:company"/>
+					<xs:element minOccurs="0" name="z_StatusCode" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="z_StatusDescription" nillable="true" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CompanyResponse" nillable="true" type="tns:CompanyResponse"/>
+			<xs:element name="PutLocation">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="locations" nillable="true" type="tns:locations"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="locations">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="location" nillable="true" type="tns:location"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="locations" nillable="true" type="tns:locations"/>
+			<xs:complexType name="location">
+				<xs:sequence>
+					<xs:element name="LocationNum" type="xs:long"/>
+					<xs:element name="LocationCode" nillable="true" type="xs:string"/>
+					<xs:element name="LocationName" nillable="true" type="xs:string"/>
+					<xs:element name="ParentAreaName" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="City" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="State" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="Country" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="PostCode" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="ExternalRef" nillable="true" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="location" nillable="true" type="tns:location"/>
+			<xs:element name="PutLocationResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="PutLocationResult" nillable="true" type="tns:LocationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="LocationResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="locations" nillable="true" type="tns:locations"/>
+					<xs:element minOccurs="0" name="z_StatusCode" nillable="true" type="xs:string"/>
+					<xs:element minOccurs="0" name="z_StatusDescription" nillable="true" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="LocationResponse" nillable="true" type="tns:LocationResponse"/>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+			<xs:element name="anyType" nillable="true" type="xs:anyType"/>
+			<xs:element name="anyURI" nillable="true" type="xs:anyURI"/>
+			<xs:element name="base64Binary" nillable="true" type="xs:base64Binary"/>
+			<xs:element name="boolean" nillable="true" type="xs:boolean"/>
+			<xs:element name="byte" nillable="true" type="xs:byte"/>
+			<xs:element name="dateTime" nillable="true" type="xs:dateTime"/>
+			<xs:element name="decimal" nillable="true" type="xs:decimal"/>
+			<xs:element name="double" nillable="true" type="xs:double"/>
+			<xs:element name="float" nillable="true" type="xs:float"/>
+			<xs:element name="int" nillable="true" type="xs:int"/>
+			<xs:element name="long" nillable="true" type="xs:long"/>
+			<xs:element name="QName" nillable="true" type="xs:QName"/>
+			<xs:element name="short" nillable="true" type="xs:short"/>
+			<xs:element name="string" nillable="true" type="xs:string"/>
+			<xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte"/>
+			<xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt"/>
+			<xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong"/>
+			<xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort"/>
+			<xs:element name="char" nillable="true" type="tns:char"/>
+			<xs:simpleType name="char">
+				<xs:restriction base="xs:int"/>
+			</xs:simpleType>
+			<xs:element name="duration" nillable="true" type="tns:duration"/>
+			<xs:simpleType name="duration">
+				<xs:restriction base="xs:duration">
+					<xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?"/>
+					<xs:minInclusive value="-P10675199DT2H48M5.4775808S"/>
+					<xs:maxInclusive value="P10675199DT2H48M5.4775807S"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="guid" nillable="true" type="tns:guid"/>
+			<xs:simpleType name="guid">
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:attribute name="FactoryType" type="xs:QName"/>
+			<xs:attribute name="Id" type="xs:ID"/>
+			<xs:attribute name="Ref" type="xs:IDREF"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ICompanyService_PutCompany_InputMessage">
+		<wsdl:part name="parameters" element="tns:PutCompany"/>
+	</wsdl:message>
+	<wsdl:message name="ICompanyService_PutCompany_OutputMessage">
+		<wsdl:part name="parameters" element="tns:PutCompanyResponse"/>
+	</wsdl:message>
+	<wsdl:message name="ICompanyService_PutLocation_InputMessage">
+		<wsdl:part name="parameters" element="tns:PutLocation"/>
+	</wsdl:message>
+	<wsdl:message name="ICompanyService_PutLocation_OutputMessage">
+		<wsdl:part name="parameters" element="tns:PutLocationResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="ICompanyService">
+		<wsdl:operation name="PutCompany">
+			<wsdl:input wsaw:Action="http://schema.greenergy.com/MDM/clients/TPT/ICompanyService/PutCompany" message="tns:ICompanyService_PutCompany_InputMessage"/>
+			<wsdl:output wsaw:Action="http://schema.greenergy.com/MDM/clients/TPT/ICompanyService/PutCompanyResponse" message="tns:ICompanyService_PutCompany_OutputMessage"/>
+		</wsdl:operation>
+		<wsdl:operation name="PutLocation">
+			<wsdl:input wsaw:Action="http://schema.greenergy.com/MDM/clients/TPT/ICompanyService/PutLocation" message="tns:ICompanyService_PutLocation_InputMessage"/>
+			<wsdl:output wsaw:Action="http://schema.greenergy.com/MDM/clients/TPT/ICompanyService/PutLocationResponse" message="tns:ICompanyService_PutLocation_OutputMessage"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BasicHttpBinding_ICompanyService" type="tns:ICompanyService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="PutCompany">
+			<soap:operation soapAction="http://schema.greenergy.com/MDM/clients/TPT/ICompanyService/PutCompany" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="PutLocation">
+			<soap:operation soapAction="http://schema.greenergy.com/MDM/clients/TPT/ICompanyService/PutLocation" style="document"/>
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CompanyService">
+		<wsdl:port name="BasicHttpBinding_ICompanyService" binding="tns:BasicHttpBinding_ICompanyService">
+			<soap:address location="http://gry75app20.greenergy.group:8085/service/tpt/company.svc"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>]]></con:wsdl>
+    <con:targetNamespace>http://schema.greenergy.com/MDM/clients/TPT</con:targetNamespace>
+</con:wsdlEntry>

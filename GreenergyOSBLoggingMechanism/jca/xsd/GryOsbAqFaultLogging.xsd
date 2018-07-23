@@ -1,0 +1,107 @@
+<xsd:schema targetNamespace="http://www.greenergy.com/osb/log" elementFormDefault="qualified" version="1.0" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.greenergy.com/osb/log" xmlns:mc="http://www.bea.com/wli/sb/context">
+  <xsd:import schemaLocation="GryOsbMessageContext.xsd" namespace="http://www.bea.com/wli/sb/context"/>
+  <xsd:element name="GryFaultMessage">
+    <xsd:complexType>
+      <xsd:complexContent>
+        <xsd:extension base="gryFaultMessageType"/>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:element>
+  <xsd:element name="GryFaultResponse" type="gryReponseType"/>
+  <xsd:complexType name="gryFaultMessageType">
+    <xsd:all>
+      <xsd:element name="gryFaultSummary" minOccurs="0" type="gryFaultSummaryType"/>
+      <xsd:element name="gryAttachments" type="gryAttachmentsType" minOccurs="0" nillable="true"/>
+      <xsd:element name="gryBodyFragments" minOccurs="0" nillable="true" type="gryFragmentType"/>
+      <xsd:element name="gryFault" minOccurs="0" nillable="true" type="gryFaultType"/>
+      <xsd:element name="gryInbound" minOccurs="0" nillable="true" type="gryInboundType"/>
+      <xsd:element name="gryOutbound" minOccurs="0" nillable="true" type="gryOutboundType"/>
+    </xsd:all>
+  </xsd:complexType>
+  <xsd:complexType name="gryFaultSummaryType">
+    <xsd:all>
+      <xsd:element name="schemaVersion" minOccurs="0" type="xsd:decimal" default="1.0" nillable="true"/>
+      <xsd:element name="faultTitle" minOccurs="0" type="xsd:string" nillable="true"/>
+      <xsd:element name="faultOwner" minOccurs="0" type="xsd:string" nillable="true"/>
+      <xsd:element name="queueName" minOccurs="0" type="xsd:string" nillable="true"/>
+      <xsd:element name="messageId" minOccurs="0" type="xsd:string" nillable="true"/>
+      <xsd:element name="correlationId" minOccurs="0" type="xsd:string" nillable="true"/>
+      <xsd:element name="publishedAt" minOccurs="0" type="xsd:dateTime" nillable="true"/>
+      <xsd:element name="supportOperation" minOccurs="0" type="xsd:string" nillable="true"/>
+      <xsd:element name="attributes" nillable="true" minOccurs="0" type="gryAttributesType"/>
+    </xsd:all>
+  </xsd:complexType>
+  <xsd:complexType name="gryAttributesType">
+    <xsd:all>
+      <xsd:element name="tokens" nillable="true" minOccurs="0">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element name="token1" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token2" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token3" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token4" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token5" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token6" nillable="true" minOccurs="0" type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="values" nillable="true" minOccurs="0">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element name="value1" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="value2" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="value3" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="value4" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="value5" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="value6" nillable="true" minOccurs="0" type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:all>
+  </xsd:complexType>
+  <xsd:complexType name="gryAttachmentsType">
+    <xsd:sequence>
+      <xsd:element ref="mc:attachments"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="gryFaultType">
+    <xsd:sequence>
+      <xsd:element ref="mc:fault"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="gryInboundType">
+    <xsd:sequence>
+      <xsd:element ref="mc:endpoint"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="gryOutboundType">
+    <xsd:sequence>
+      <xsd:element ref="mc:endpoint"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="gryReponseType"/>
+  <xsd:complexType name="gryFragmentType">
+    <xsd:all>
+      <xsd:element name="fragmentTokens" nillable="true" minOccurs="0">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element name="token1" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token2" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token3" nillable="true" minOccurs="0" type="xsd:string"/>
+            <xsd:element name="token4" nillable="true" minOccurs="0" type="xsd:string"/>
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="fragments" nillable="true" minOccurs="0">
+        <xsd:complexType>
+          <xsd:all>
+            <xsd:element name="fragment1" nillable="true" minOccurs="0" type="xsd:anyType"/>
+            <xsd:element name="fragment2" nillable="true" minOccurs="0" type="xsd:anyType"/>
+            <xsd:element name="fragment3" nillable="true" minOccurs="0" type="xsd:anyType"/>
+            <xsd:element name="fragment4" nillable="true" minOccurs="0" type="xsd:anyType"/>
+          </xsd:all>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:all>
+  </xsd:complexType>
+</xsd:schema>

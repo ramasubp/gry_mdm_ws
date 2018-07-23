@@ -1,0 +1,24 @@
+<?binding.jca GryMDMFetchFieldXRefByEBizID_db.jca?><wsdl:definitions name="GryMDMFetchFieldXRefByEBizID" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchFieldXRefByEBizID" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchFieldXRefByEBizID" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchFieldXRefByEBizID" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="GryMDMFetchFieldXRefByEBizID_plt">
+        <plt:role name="GryMDMFetchFieldXRefByEBizID_role">
+            <plt:portType name="tns:GryMDMFetchFieldXRefByEBizID_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchFieldXRefByEBizID" schemaLocation="../xsd/GryMDMFetchFieldXRefByEBizID.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GryMDMFetchFieldXRefByEBizIDInput_msg">
+        <wsdl:part name="GryMDMFetchFieldXRefByEBizIDInput_msg" element="db:GryMDMFetchFieldXRefByEBizIDInput"/>
+    </wsdl:message>
+    <wsdl:message name="GryMDMFetchFieldXRefByEBizIDOutputCollection_msg">
+        <wsdl:part name="GryMDMFetchFieldXRefByEBizIDOutputCollection" element="db:GryMDMFetchFieldXRefByEBizIDOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="GryMDMFetchFieldXRefByEBizID_ptt">
+        <wsdl:operation name="GryMDMFetchFieldXRefByEBizID">
+            <wsdl:input message="tns:GryMDMFetchFieldXRefByEBizIDInput_msg"/>
+            <wsdl:output message="tns:GryMDMFetchFieldXRefByEBizIDOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

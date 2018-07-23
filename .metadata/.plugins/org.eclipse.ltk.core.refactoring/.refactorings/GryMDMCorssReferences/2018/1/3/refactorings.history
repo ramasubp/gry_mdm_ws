@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GryMDMCorssReferences/jca/wsdl/LookUpXRefs.wsdl&apos; to &apos;LookUpXRefs_db.wsdl&apos;" description="Rename resource &apos;LookUpXRefs.wsdl&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="jca/wsdl/LookUpXRefs.wsdl" name="LookUpXRefs_db.wsdl" stamp="1516358426573" updateReferences="true"/>
+</session>

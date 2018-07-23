@@ -1,0 +1,20 @@
+<definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchFieldXRefByEBizID" name="GryMDMFetchFieldXRefByEBizID-concrete" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchFieldXRefByEBizID" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchFieldXRefByEBizID" location="../jca/wsdl/GryMDMFetchFieldXRefByEBizID.wsdl"/>
+  <binding name="GryMDMFetchFieldXRefByEBizID_ptt-binding" type="tns:GryMDMFetchFieldXRefByEBizID_ptt">
+    <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+    <operation name="GryMDMFetchFieldXRefByEBizID">
+      <soap:operation soapAction="GryMDMFetchFieldXRefByEBizID"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="GryMDMFetchFieldXRefByEBizID-service">
+    <port name="GryMDMFetchFieldXRefByEBizID-port" binding="tns:GryMDMFetchFieldXRefByEBizID_ptt-binding">
+      <soap:address location="jca://eis/DB/AQDataSource"/>
+    </port>
+  </service>
+</definitions>

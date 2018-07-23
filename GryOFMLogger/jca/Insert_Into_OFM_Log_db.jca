@@ -1,0 +1,13 @@
+<adapter-config name="Insert_Into_OFM_Log" adapter="Database Adapter" wsdlLocation="../wsdl/Insert_Into_OFM_Log.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/AQDataSource" UIConnectionName="AQ_OSB_PPR" adapterRef=""/>
+  <endpoint-interaction portType="Insert_Into_OFM_Log_ptt" operation="Insert_Into_OFM_Log">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="AQ_OSB"/>
+      <property name="PackageName" value="XXGRY_OFM_LOG_MGR"/>
+      <property name="ProcedureName" value="PROCESS_LOG"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

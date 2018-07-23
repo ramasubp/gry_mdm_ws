@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GryMDMCustomerIntegration/proxy/GryMDMTPTDelivery.proxy&apos; to &apos;GryMDMRefDataDelivery.proxy&apos;" description="Rename resource &apos;GryMDMTPTDelivery.proxy&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="proxy/GryMDMTPTDelivery.proxy" name="GryMDMRefDataDelivery.proxy" stamp="1502356668145" updateReferences="true"/>
+</session>

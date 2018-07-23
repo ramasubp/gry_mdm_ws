@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:schemaEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:schema><![CDATA[<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchXRefByMDSID" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchXRefByMDSID" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="GryMDMFetchXRefByMDSIDInput" type="GryMDMFetchXRefByMDSIDInput"/>
+   <xs:complexType name="GryMDMFetchXRefByMDSIDInput">
+      <xs:sequence>
+         <xs:element name="md_seq_id" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="GryMDMFetchXRefByMDSIDOutputCollection" type="GryMDMFetchXRefByMDSIDOutputCollection"/>
+   <xs:complexType name="GryMDMFetchXRefByMDSIDOutputCollection">
+      <xs:sequence>
+         <xs:element name="GryMDMFetchXRefByMDSIDOutput" type="GryMDMFetchXRefByMDSIDOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="GryMDMFetchXRefByMDSIDOutput">
+      <xs:sequence>
+         <xs:element name="MASTER_DATA_SEQ" type="xs:decimal" nillable="true"/>
+         <xs:element name="ENT_NAME" type="xs:string" nillable="true"/>
+         <xs:element name="SYS_NAME" type="xs:string" nillable="true"/>
+         <xs:element name="TARGET_REFERENCE" type="xs:string" nillable="true"/>
+         <xs:element name="CREATED_DATE" type="xs:dateTime" nillable="true"/>
+         <xs:element name="UPDATED_DATE" type="xs:dateTime" nillable="true"/>
+         <xs:element name="TARGET_ALIAS" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>]]></con:schema>
+    <con:targetNamespace>http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchXRefByMDSID</con:targetNamespace>
+</con:schemaEntry>

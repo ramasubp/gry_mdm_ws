@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/publish/config">
+  <ser:coreEntry isProxy="true" isEnabled="true">
+    <ser:binding type="SOAP" isSoap12="false" xsi:type="con:SoapBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:wsdl ref="GryMDMCustomerIntegration/wsdl/GryMDMCustomer"/>
+      <con:port>
+        <con:name>GryMDMCustomer_pt</con:name>
+        <con:namespace>http://schema.greenergy.com/MDM/Customer/GryMDMCustomer</con:namespace>
+      </con:port>
+      <con:selector type="SOAP body"/>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+    <ser:ws-policy>
+      <ser:binding-mode>wsdl-policy-attachments</ser:binding-mode>
+    </ser:ws-policy>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/GryMDMCustomerIntegration/proxy/GryMDMCustomerEventConsumer</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>true</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-4654916794248459127-5ac9fc38.15edd22bc38.-7f40">
+    <con:pipeline type="request" name="ConsumeEvent_request">
+      <con:stage name="InitilizationStage">
+        <con:context>
+          <con2:varNsDecl namespace="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer" prefix="cus"/>
+        </con:context>
+        <con:actions>
+          <con5:assign varName="GryMDMCustomer" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+            <con2:id>_ActionId-5948914574889658770--631ffdc4.15e385468a2.-7fff</con2:id>
+            <con5:expr>
+              <con2:xqueryText>$body</con2:xqueryText>
+            </con5:expr>
+          </con5:assign>
+          <con3:assign varName="GryInstanceID">
+            <con2:id>_ActionId-5752425329611212356-374ef667.15f0ae73961.-7eb9</con2:id>
+            <con3:expr>
+              <con2:xqueryText>fn-bea:uuid()</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+          <con3:assign varName="TransactionID">
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7fe5</con2:id>
+            <con3:expr>
+              <con2:xqueryText>$body/cus:MASTERDATA_CUSTOMER/cus:PARTY/cus:PARTY_NAME/text()</con2:xqueryText>
+            </con3:expr>
+          </con3:assign>
+        </con:actions>
+      </con:stage>
+      <con:stage name="OFMLogging">
+        <con:context/>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7fe1</con2:id>
+            <con3:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText><![CDATA[<gry:GryOFMLogger xmlns:gry="http://greenergy.com/OFM/GryOFMLogger">
+    <gry:FlowID>{$GryInstanceID}</gry:FlowID>
+    <gry:ComponentInstanceID>GryMDMCustomerEventConsumer</gry:ComponentInstanceID>
+    <gry:TransactionID>{$TransactionID}</gry:TransactionID>
+    <gry:ApplicationName>GryMDMCustomerIntegration</gry:ApplicationName>
+    <gry:LoggerDateTime></gry:LoggerDateTime>
+    <gry:ProcessStatus>Started</gry:ProcessStatus>
+    <gry:DisplayMessage>MDM Customer Event consumed from EBS</gry:DisplayMessage>
+	<gry:HostServerName></gry:HostServerName>
+    <gry:ManagedServerName></gry:ManagedServerName>
+    <gry:DomainName></gry:DomainName>
+    <gry:Platform></gry:Platform>
+	<gry:Source>EBS</gry:Source>
+    <gry:Destination>GryMDMCustomerTopic</gry:Destination>
+    <gry:Payload>{fn-bea:serialize($GryMDMCustomer)}</gry:Payload>
+    <gry:Headers></gry:Headers>
+    <gry:Key></gry:Key>
+    <gry:CustomField1></gry:CustomField1>
+    <gry:CustomField2></gry:CustomField2>
+    <gry:CustomField3></gry:CustomField3>
+    <gry:CustomField4></gry:CustomField4>
+    <gry:CustomField5></gry:CustomField5>
+</gry:GryOFMLogger>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con4:route>
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7fe0</con2:id>
+            <con4:service ref="GryOFMLogger/Proxy/GryOFMLoggerPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform/>
+          </con4:route>
+          <con3:replace varName="body">
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7ed3</con2:id>
+            <con3:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText>$GryMDMCustomer</con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ValidateInput">
+        <con:context>
+          <con2:varNsDecl namespace="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer" prefix="cus"/>
+        </con:context>
+        <con:actions>
+          <con3:validate>
+            <con2:id>_ActionId-5752425329611212356-374ef667.15f0ae73961.-7e8c</con2:id>
+            <con3:schema ref="GryMDMCustomerIntegration/xsd/GryEbizCustomer"/>
+            <con3:schemaElement xmlns:cus="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer">cus:MASTERDATA_CUSTOMER</con3:schemaElement>
+            <con3:varName>body</con3:varName>
+            <con3:location>
+              <con2:xpathText>./cus:MASTERDATA_CUSTOMER</con2:xpathText>
+            </con3:location>
+          </con3:validate>
+        </con:actions>
+      </con:stage>
+      <con:stage name="UpdateMasterData">
+        <con:context>
+          <con2:varNsDecl namespace="http://schema.greenergy.com/MDM/CrossReferences/Master" prefix="mas"/>
+          <con2:varNsDecl namespace="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer" prefix="cus"/>
+          <con2:varNsDecl namespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/BulkUpdateMasterData" prefix="bul"/>
+        </con:context>
+        <con:actions>
+          <con3:wsCallout>
+            <con2:id>_ActionId-5127620037043565770-27d3fea6.15ec7d05bca.-7fd0</con2:id>
+            <con3:service xsi:type="ref:BusinessServiceRef" ref="GryMDMCorssReferences/business/BulkUpdateMasterData" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>BulkUpdateMasterData</con3:operation>
+            <con3:request>
+              <con3:body>$BulkUpdateMasterDataReq</con3:body>
+            </con3:request>
+            <con3:response>
+              <con3:body>BulkUpdateMasterDataRes</con3:body>
+            </con3:response>
+            <con3:requestTransform>
+              <con3:assign varName="BulkUpdateMasterDataReq">
+                <con2:id>_ActionId-5127620037043565770-27d3fea6.15ec7d05bca.-7f27</con2:id>
+                <con3:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="GryMDMCustomerIntegration/transformation/GryMDMCustomerUpdateMD"/>
+                    <con2:param name="mASTERDATA_CUSTOMER1">
+                      <con2:path>$body/cus:MASTERDATA_CUSTOMER</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con3:expr>
+              </con3:assign>
+            </con3:requestTransform>
+            <con3:responseTransform>
+              <con3:replace varName="body" contents-only="true">
+                <con2:id>_ActionId-2197143996803111856-6dcf293f.15f00ef7271.-7fd8</con2:id>
+                <con3:location>
+                  <con2:xpathText>.</con2:xpathText>
+                </con3:location>
+                <con3:expr>
+                  <con2:xqueryTransform>
+                    <con2:resource ref="GryMDMCustomerIntegration/transformation/GryMDMCustomerMapMDSeq"/>
+                    <con2:param name="outputParameters1">
+                      <con2:path>$BulkUpdateMasterDataRes</con2:path>
+                    </con2:param>
+                    <con2:param name="mASTERDATA_CUSTOMER1">
+                      <con2:path>$body/cus:MASTERDATA_CUSTOMER</con2:path>
+                    </con2:param>
+                  </con2:xqueryTransform>
+                </con3:expr>
+              </con3:replace>
+            </con3:responseTransform>
+          </con3:wsCallout>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="ConsumeEvent_response">
+      <con:stage name="OFMLogging">
+        <con:context/>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-5752425329611212356-374ef667.15f0ae73961.-7c0e</con2:id>
+            <con3:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText><![CDATA[<gry:GryOFMLogger xmlns:gry="http://greenergy.com/OFM/GryOFMLogger">
+    <gry:FlowID>{$GryInstanceID}</gry:FlowID>
+    <gry:ComponentInstanceID>GryMDMCustomerEventConsumer</gry:ComponentInstanceID>
+    <gry:TransactionID>{$TransactionID}</gry:TransactionID>
+    <gry:ApplicationName>GryMDMCustomerIntegration</gry:ApplicationName>
+    <gry:LoggerDateTime></gry:LoggerDateTime>
+    <gry:ProcessStatus>Completed</gry:ProcessStatus>
+    <gry:DisplayMessage>MDM Customer data sent to Topic</gry:DisplayMessage>
+	<gry:HostServerName></gry:HostServerName>
+    <gry:ManagedServerName></gry:ManagedServerName>
+    <gry:DomainName></gry:DomainName>
+    <gry:Platform></gry:Platform>
+	<gry:Source>EBS</gry:Source>
+    <gry:Destination>GryMDMCustomerTopic</gry:Destination>
+    <gry:Payload>{fn-bea:serialize($GryMDMCustomer)}</gry:Payload>
+    <gry:Headers></gry:Headers>
+    <gry:Key></gry:Key>
+    <gry:CustomField1></gry:CustomField1>
+    <gry:CustomField2></gry:CustomField2>
+    <gry:CustomField3></gry:CustomField3>
+    <gry:CustomField4></gry:CustomField4>
+    <gry:CustomField5></gry:CustomField5>
+</gry:GryOFMLogger>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con4:route>
+            <con2:id>_ActionId-5752425329611212356-374ef667.15f0ae73961.-7c62</con2:id>
+            <con4:service ref="GryOFMLogger/Proxy/GryOFMLoggerPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform/>
+          </con4:route>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="error" name="_onErrorHandler-4654916794248459127-5ac9fc38.15edd22bc38.-7f40">
+      <con:stage name="ErrorStage">
+        <con:context xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+          <con2:userNsDecl namespace="http://www.greenergy.com/osb/log" prefix="gry"/>
+        </con:context>
+        <con:actions xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+          <con6:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/pipeline/config" xmlns:con="http://www.bea.com/wli/sb/typesystem/config" xmlns:file="http://www.bea.com/wli/sb/transports/file" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config" xmlns:con6="http://www.bea.com/wli/sb/stages/transform/config">
+            <con3:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7c0b</con3:id>
+            <con6:location>
+              <con3:xpathText>.</con3:xpathText>
+            </con6:location>
+            <con6:expr>
+              <con3:xqueryText><![CDATA[<gry:GryFaultMessage>
+  <gry:gryFaultSummary>
+    <gry:schemaVersion>1.0</gry:schemaVersion>
+    <gry:faultTitle>GRY MDM RefData Delivery Failure</gry:faultTitle>
+    <gry:faultOwner>MDM</gry:faultOwner>
+    <gry:queueName></gry:queueName>
+    <gry:messageId></gry:messageId>
+    <gry:correlationId></gry:correlationId>
+    <gry:publishedAt>{fn:current-dateTime()}</gry:publishedAt>
+    <gry:supportOperation></gry:supportOperation>
+   <gry:attributes>
+      <gry:tokens>
+        <gry:token1></gry:token1>
+        <gry:token2></gry:token2>
+        <gry:token3></gry:token3>
+        <gry:token4></gry:token4>
+        <gry:token5></gry:token5>
+        <gry:token6></gry:token6>
+      </gry:tokens>
+      <gry:values>
+        <gry:value1></gry:value1>
+        <gry:value2></gry:value2>
+        <gry:value3></gry:value3>
+        <gry:value4></gry:value4>
+        <gry:value5></gry:value5>
+        <gry:value6></gry:value6>
+      </gry:values>
+    </gry:attributes>
+  </gry:gryFaultSummary>
+  <gry:gryAttachments></gry:gryAttachments>  
+  <gry:gryBodyFragments>
+      <gry:fragmentTokens>
+        <gry:token1>GRY MDM Customer</gry:token1>
+        <gry:token2></gry:token2>
+        <gry:token3></gry:token3>
+        <gry:token4></gry:token4>      
+      </gry:fragmentTokens>  
+      <gry:fragments> 
+        <gry:fragment1>{$GryMDMCustomer}</gry:fragment1>
+        <gry:fragment2></gry:fragment2>
+        <gry:fragment3></gry:fragment3>
+        <gry:fragment4></gry:fragment4>         
+      </gry:fragments>          
+  </gry:gryBodyFragments>          
+  <gry:gryFault>{$fault}</gry:gryFault>            
+  <gry:gryInbound>{$inbound}</gry:gryInbound>   
+  <gry:gryOutbound>{$outbound}</gry:gryOutbound>      
+</gry:GryFaultMessage>]]></con3:xqueryText>
+            </con6:expr>
+          </con6:replace>
+          <con3:route xmlns:ema="http://www.bea.com/wli/sb/transports/email" xmlns:con6="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7c0a</con2:id>
+            <con3:service ref="GreenergyOSBLoggingMechanism/proxy/GryLogFaultAdminNtfy" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>EnqueueFaultMessage</con3:operation>
+            <con3:outboundTransform>
+              <con5:delete varName="attachments" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7c09</con2:id>
+              </con5:delete>
+            </con3:outboundTransform>
+          </con3:route>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ErrorLogging">
+        <con:context/>
+        <con:actions>
+          <con3:replace varName="body" contents-only="true">
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7c19</con2:id>
+            <con3:location>
+              <con2:xpathText>.</con2:xpathText>
+            </con3:location>
+            <con3:expr>
+              <con2:xqueryText><![CDATA[<gry:GryOFMLogger xmlns:gry="http://greenergy.com/OFM/GryOFMLogger">
+    <gry:FlowID>{$GryInstanceID}</gry:FlowID>
+    <gry:ComponentInstanceID>GryMDMCustomerEventConsumer</gry:ComponentInstanceID>
+    <gry:TransactionID>{$TransactionID}</gry:TransactionID>
+    <gry:ApplicationName>GryMDMCustomerIntegration</gry:ApplicationName>
+    <gry:LoggerDateTime></gry:LoggerDateTime>
+    <gry:ProcessStatus>Faulted</gry:ProcessStatus>
+    <gry:DisplayMessage>Faulted to write MDM Customer to Topic</gry:DisplayMessage>
+	<gry:HostServerName></gry:HostServerName>
+    <gry:ManagedServerName></gry:ManagedServerName>
+    <gry:DomainName></gry:DomainName>
+    <gry:Platform></gry:Platform>
+	<gry:Source>EBS</gry:Source>
+    <gry:Destination>GryMDMCustomerTopic</gry:Destination>
+    <gry:Payload>{fn-bea:serialize($fault)}</gry:Payload>
+    <gry:Headers></gry:Headers>
+    <gry:Key></gry:Key>
+    <gry:CustomField1></gry:CustomField1>
+    <gry:CustomField2></gry:CustomField2>
+    <gry:CustomField3></gry:CustomField3>
+    <gry:CustomField4></gry:CustomField4>
+    <gry:CustomField5></gry:CustomField5>
+</gry:GryOFMLogger>]]></con2:xqueryText>
+            </con3:expr>
+          </con3:replace>
+          <con4:route>
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7c18</con2:id>
+            <con4:service ref="GryOFMLogger/Proxy/GryOFMLoggerPS" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform/>
+          </con4:route>
+          <con2:reply isError="true">
+            <con2:id>_ActionId-1453898433337310759--6f3757e3.15f90d799de.-7beb</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="ConsumeEvent">
+        <con:request>ConsumeEvent_request</con:request>
+        <con:response>ConsumeEvent_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="EnqueCustomer">
+        <con:context>
+          <con2:varNsDecl namespace="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer" prefix="cus"/>
+        </con:context>
+        <con:actions>
+          <con1:route>
+            <con2:id>_ActionId-3625756204582970052-df0e65f.15d3aa64297.-7fb2</con2:id>
+            <con1:service ref="GryMDMCustomerIntegration/business/GryEnqueueCustomer" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con1:outboundTransform>
+              <con3:transport-headers copy-all="false">
+                <con2:id>_ActionId-9096262181914742801-2d16351c.15ffcccc60a.-7b07</con2:id>
+                <con3:header-set>outbound-request</con3:header-set>
+                <con3:header value="expression" name="TargetSystem">
+                  <con2:xqueryText>$body/cus:MASTERDATA_CUSTOMER/cus:MessageHeader/cus:Destination/text()</con2:xqueryText>
+                </con3:header>
+              </con3:transport-headers>
+            </con1:outboundTransform>
+            <con1:responseTransform/>
+          </con1:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

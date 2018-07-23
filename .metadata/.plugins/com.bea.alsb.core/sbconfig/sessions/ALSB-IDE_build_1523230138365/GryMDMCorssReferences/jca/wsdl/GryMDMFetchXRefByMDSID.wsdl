@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<?binding.jca GryMDMFetchXRefByMDSID_db.jca?>
+<wsdl:definitions name="GryMDMFetchXRefByMDSID" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchXRefByMDSID" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchXRefByMDSID" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchXRefByMDSID" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="GryMDMFetchXRefByMDSID_plt">
+        <plt:role name="GryMDMFetchXRefByMDSID_role">
+            <plt:portType name="tns:GryMDMFetchXRefByMDSID_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchXRefByMDSID" schemaLocation="../xsd/GryMDMFetchXRefByMDSID.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GryMDMFetchXRefByMDSIDInput_msg">
+        <wsdl:part name="GryMDMFetchXRefByMDSIDInput_msg" element="db:GryMDMFetchXRefByMDSIDInput"/>
+    </wsdl:message>
+    <wsdl:message name="GryMDMFetchXRefByMDSIDOutputCollection_msg">
+        <wsdl:part name="GryMDMFetchXRefByMDSIDOutputCollection" element="db:GryMDMFetchXRefByMDSIDOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="GryMDMFetchXRefByMDSID_ptt">
+        <wsdl:operation name="GryMDMFetchXRefByMDSID">
+            <wsdl:input message="tns:GryMDMFetchXRefByMDSIDInput_msg"/>
+            <wsdl:output message="tns:GryMDMFetchXRefByMDSIDOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>]]></con:wsdl>
+    <con:dependencies>
+        <con:schemaRef isInclude="false" schemaLocation="../xsd/GryMDMFetchXRefByMDSID.xsd" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchXRefByMDSID" ref="GryMDMCorssReferences/jca/xsd/GryMDMFetchXRefByMDSID"/>
+    </con:dependencies>
+    <con:targetNamespace>http://xmlns.oracle.com/pcbpel/adapter/db/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryMDMFetchXRefByMDSID</con:targetNamespace>
+</con:wsdlEntry>

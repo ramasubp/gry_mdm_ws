@@ -1,0 +1,6 @@
+1513070283023	Move 'BillingsCustomer.xq' to 'Billings'
+1513070304514	Move 'RefDataCustomer.xq' to 'RefData'
+1513070363814	Move 'TPTCustomerSites.xq' to 'TPTSites'
+1513070372437	Move 'TPTCustomer.xq' to 'TPTCustomer'
+1513073831835	Rename resource 'TPTCustomerSites.xq'
+1513073856643	Rename resource 'GryMDMTPTDelivery.proxy'

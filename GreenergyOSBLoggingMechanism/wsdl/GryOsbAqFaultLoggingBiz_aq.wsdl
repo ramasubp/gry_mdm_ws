@@ -1,0 +1,17 @@
+<definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/AQ/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryOsbAqFaultLogging" name="GryOsbAqFaultLogging-concrete" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/AQ/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryOsbAqFaultLogging" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/AQ/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryOsbAqFaultLogging" location="../jca/wsdl/GryOsbAqFaultLogging.wsdl"/>
+  <binding name="EnqueueFaultMessage_ptt-binding" type="tns:EnqueueFaultMessage_ptt">
+    <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+    <operation name="EnqueueFaultMessage">
+      <soap:operation soapAction="EnqueueFaultMessage"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="GryOsbAqFaultLogging-service">
+    <port name="GryOsbAqFaultLogging-port" binding="tns:EnqueueFaultMessage_ptt-binding">
+      <soap:address location="jca://eis/AQ/AQDataSource"/>
+    </port>
+  </service>
+</definitions>

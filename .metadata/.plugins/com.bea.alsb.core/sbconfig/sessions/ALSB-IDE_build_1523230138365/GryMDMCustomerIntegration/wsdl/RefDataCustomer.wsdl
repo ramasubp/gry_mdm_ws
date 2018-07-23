@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="CustomerService"
+	targetNamespace="http://schema.greenergy.com/MDM/clients/REFDATA"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+	xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+	xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+	xmlns:i0="http://tempuri.org/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="http://schema.greenergy.com/MDM/clients/REFDATA"
+	xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/MDM/clients/REFDATA"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="GetCustomer">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="customerId" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCustomerResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="GetCustomerResult"
+							nillable="true" type="tns:CustomerResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="CustomerResponse">
+				<xs:sequence>
+					<xs:element name="Customer" nillable="true" type="tns:Customer" />
+					<xs:element minOccurs="0" name="z_StatusCode" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="z_StatusDescription"
+						nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CustomerResponse" nillable="true"
+				type="tns:CustomerResponse" />
+			<xs:complexType name="Customer">
+				<xs:sequence>
+					<xs:element name="CustomerId" type="xs:long" />
+					<xs:element name="CustomerName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="CustomerCode" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="CustomerSiteGroups"
+						nillable="true" type="tns:CustomerSiteGroups" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="Customer" nillable="true" type="tns:Customer" />
+			<xs:complexType name="CustomerSiteGroups">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerSiteGroup"
+						nillable="true" type="tns:CustomerSiteGroup" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CustomerSiteGroups" nillable="true"
+				type="tns:CustomerSiteGroups" />
+			<xs:complexType name="CustomerSiteGroup">
+				<xs:sequence>
+					<xs:element name="SiteGroupId" type="xs:long" />
+					<xs:element name="SiteGroupName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="CustomerSites" nillable="true"
+						type="tns:CustomerSites" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CustomerSiteGroup" nillable="true"
+				type="tns:CustomerSiteGroup" />
+			<xs:complexType name="CustomerSites">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="CustomerSite"
+						nillable="true" type="tns:CustomerSite" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CustomerSites" nillable="true"
+				type="tns:CustomerSites" />
+			<xs:complexType name="CustomerSite">
+				<xs:sequence>
+					<xs:element name="SiteId" type="xs:long" />
+					<xs:element name="SiteName" nillable="true" type="xs:string" />
+					<xs:element name="SiteCode" nillable="true" type="xs:string" />
+					<xs:element name="IsCurrent" type="xs:boolean" />
+					<xs:element name="IsVisitEnabled" type="xs:boolean" />
+					<xs:element name="IsSendVisitEmail" type="xs:boolean" />
+					<xs:element name="UseAddressAsSiteName" type="xs:boolean" />
+					<xs:element name="ScheduleGroup" nillable="true" type="xs:string" />
+					<xs:element name="CustomerType" nillable="true" type="xs:string" />
+					<xs:element name="Address" nillable="true" type="tns:Address" />
+					<xs:element minOccurs="0" name="Phone" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="Email" nillable="true"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="CustomerSite" nillable="true"
+				type="tns:CustomerSite" />
+			<xs:complexType name="Address">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="BuildingNumber"
+						nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="AddressLine1" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="AddressLine2" nillable="true"
+						type="xs:string" />
+					<xs:element minOccurs="0" name="AddressLine3" nillable="true"
+						type="xs:string" />
+					<xs:element name="Town" nillable="true" type="xs:string" />
+					<xs:element name="County" nillable="true" type="xs:string" />
+					<xs:element name="Country" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" name="PostCode" nillable="true"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="Address" nillable="true" type="tns:Address" />
+			<xs:element name="PutCustomer">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="customer" nillable="true"
+							type="tns:Customer" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutCustomerResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="PutCustomerResult"
+							nillable="true" type="tns:CustomerResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteCustomer">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="customerId" type="xs:long" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteCustomerResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" name="DeleteCustomerResult"
+							nillable="true" type="tns:CustomerResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema attributeFormDefault="qualified"
+			elementFormDefault="qualified"
+			targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/">
+			<xs:element name="anyType" nillable="true" type="xs:anyType" />
+			<xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+			<xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+			<xs:element name="boolean" nillable="true" type="xs:boolean" />
+			<xs:element name="byte" nillable="true" type="xs:byte" />
+			<xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+			<xs:element name="decimal" nillable="true" type="xs:decimal" />
+			<xs:element name="double" nillable="true" type="xs:double" />
+			<xs:element name="float" nillable="true" type="xs:float" />
+			<xs:element name="int" nillable="true" type="xs:int" />
+			<xs:element name="long" nillable="true" type="xs:long" />
+			<xs:element name="QName" nillable="true" type="xs:QName" />
+			<xs:element name="short" nillable="true" type="xs:short" />
+			<xs:element name="string" nillable="true" type="xs:string" />
+			<xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+			<xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+			<xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+			<xs:element name="unsignedShort" nillable="true"
+				type="xs:unsignedShort" />
+			<xs:element name="char" nillable="true" type="tns:char" />
+			<xs:simpleType name="char">
+				<xs:restriction base="xs:int" />
+			</xs:simpleType>
+			<xs:element name="duration" nillable="true" type="tns:duration" />
+			<xs:simpleType name="duration">
+				<xs:restriction base="xs:duration">
+					<xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+					<xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+					<xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:element name="guid" nillable="true" type="tns:guid" />
+			<xs:simpleType name="guid">
+				<xs:restriction base="xs:string">
+					<xs:pattern
+						value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:attribute name="FactoryType" type="xs:QName" />
+			<xs:attribute name="Id" type="xs:ID" />
+			<xs:attribute name="Ref" type="xs:IDREF" />
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="ICustomerService_GetCustomer_InputMessage">
+		<wsdl:part name="parameters" element="tns:GetCustomer" />
+	</wsdl:message>
+	<wsdl:message name="ICustomerService_GetCustomer_OutputMessage">
+		<wsdl:part name="parameters" element="tns:GetCustomerResponse" />
+	</wsdl:message>
+	<wsdl:message name="ICustomerService_PutCustomer_InputMessage">
+		<wsdl:part name="parameters" element="tns:PutCustomer" />
+	</wsdl:message>
+	<wsdl:message name="ICustomerService_PutCustomer_OutputMessage">
+		<wsdl:part name="parameters" element="tns:PutCustomerResponse" />
+	</wsdl:message>
+	<wsdl:message name="ICustomerService_DeleteCustomer_InputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteCustomer" />
+	</wsdl:message>
+	<wsdl:message name="ICustomerService_DeleteCustomer_OutputMessage">
+		<wsdl:part name="parameters" element="tns:DeleteCustomerResponse" />
+	</wsdl:message>
+	<wsdl:portType name="ICustomerService">
+		<wsdl:operation name="GetCustomer">
+			<wsdl:input
+				wsaw:Action="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/GetCustomer"
+				message="tns:ICustomerService_GetCustomer_InputMessage" />
+			<wsdl:output
+				wsaw:Action="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/GetCustomerResponse"
+				message="tns:ICustomerService_GetCustomer_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="PutCustomer">
+			<wsdl:input
+				wsaw:Action="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/PutCustomer"
+				message="tns:ICustomerService_PutCustomer_InputMessage" />
+			<wsdl:output
+				wsaw:Action="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/PutCustomerResponse"
+				message="tns:ICustomerService_PutCustomer_OutputMessage" />
+		</wsdl:operation>
+		<wsdl:operation name="DeleteCustomer">
+			<wsdl:input
+				wsaw:Action="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/DeleteCustomer"
+				message="tns:ICustomerService_DeleteCustomer_InputMessage" />
+			<wsdl:output
+				wsaw:Action="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/DeleteCustomerResponse"
+				message="tns:ICustomerService_DeleteCustomer_OutputMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BasicHttpBinding_ICustomerService"
+		type="tns:ICustomerService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="GetCustomer">
+			<soap:operation
+				soapAction="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/GetCustomer"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="PutCustomer">
+			<soap:operation
+				soapAction="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/PutCustomer"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="DeleteCustomer">
+			<soap:operation
+				soapAction="http://schema.greenergy.com/MDM/clients/REFDATA/ICustomerService/DeleteCustomer"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CustomerService">
+		<wsdl:port name="BasicHttpBinding_ICustomerService" binding="tns:BasicHttpBinding_ICustomerService">
+			<soap:address
+				location="http://gry75app20.greenergy.group:8085/service/ref_data/customer.svc" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>]]></con:wsdl>
+    <con:targetNamespace>http://schema.greenergy.com/MDM/clients/REFDATA</con:targetNamespace>
+</con:wsdlEntry>

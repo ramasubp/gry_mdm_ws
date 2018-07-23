@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;GryMDMCustomerIntegration/wsdl/Portal.wsdl&apos; to &apos;PortalCustomer.wsdl&apos;" description="Rename resource &apos;Portal.wsdl&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="wsdl/Portal.wsdl" name="PortalCustomer.wsdl" stamp="1517556154100" updateReferences="true"/>
+</session>

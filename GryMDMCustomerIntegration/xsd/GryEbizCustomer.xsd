@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mdm="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer">
+  <xs:element name="MASTERDATA_CUSTOMER">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MessageHeader">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MessageID" type="xs:int"/>
+              <xs:element name="MessageGenDate" type="xs:dateTime"/>
+              <xs:element name="SourceSystemID" type="xs:string"/>
+              <xs:element name="Destination">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:enumeration value="ALL"/>
+                    <xs:enumeration value="RefData"/>
+                    <xs:enumeration value="TPT"/>
+                    <xs:enumeration value="Billings"/>
+                    <xs:enumeration value="OILPLANNER"/>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="PARTY" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="mdm:NonEmptyString" name="PARTY_ID"/>
+              <xs:element type="xs:string" name="PARENT_PARTY_ID"/>
+              <xs:element type="xs:string" name="PARENT_PARTY_NUMBER" />
+			  <xs:element type="xs:string" name="PARENT_PARTY_NAME" />
+              <xs:element type="xs:string" name="PARTY_NUMBER"/>
+              <xs:element type="mdm:NonEmptyString" name="PARTY_NAME"/>
+              <xs:element type="xs:string" name="STREET_NAME"/>
+              <xs:element type="xs:string" name="HOUSE_NUMBER"/>
+              <xs:element type="mdm:NonEmptyString" name="TOWN"/>
+              <xs:element type="mdm:NonEmptyString" name="COUNTY"/>
+              <xs:element type="mdm:NonEmptyString" name="POSTAL_CODE"/>
+              <xs:element type="xs:string" name="EMAIL"/>
+              <xs:element type="xs:string" name="PHONE"/> 
+              <xs:element type="xs:string" name="PARTY_TAX_REFERENCE" minOccurs="0"/>
+              <xs:element type="xs:string" name="ESSO_DEALER_FLAG"/>
+              <xs:element type="mdm:CrossRefType" name="CrossRef" minOccurs="0" maxOccurs="unbounded"/>
+              <xs:element name="CUSTOMER_ACCOUNT" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="mdm:NonEmptyString" name="CUST_ACCOUNT_ID"/>
+                    <xs:element type="xs:string" name="PARTY_ID"/>
+                    <xs:element type="mdm:NonEmptyString" name="CUSTOMER_ACCOUNT_NUMBER"/>
+                    <xs:element type="xs:string" name="CUSTOMER_CLASS"/>
+                    <xs:element type="xs:string" name="CUSTOMER_TYPE"/>                    
+                                    
+                    <xs:element type="xs:string" name="PROFILE_CLASS"/>
+                    <xs:element type="xs:string" name="CREDIT_CLASSIFICATION" minOccurs="0"/>
+                    <xs:element type="xs:string" name="CREDIT_LIMIT_AMOUNT" minOccurs="0"/>
+                    <xs:element type="xs:string" name="CREDIT_LIMIT_CURRENCY"/>
+                    <xs:element name="CUSTOMER_SITE" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="mdm:NonEmptyString" name="CUST_ACCT_SITE_ID"/>
+                          <xs:element type="xs:string" name="CUST_ACCOUNT_ID"/>
+                          <xs:element type="xs:string" name="PARTY_SITE_ID"/>
+                          <xs:element type="mdm:NonEmptyString" name="PARTY_SITE_NUMBER"/>
+                          <xs:element type="mdm:NonEmptyString" name="PARTY_SITE_NAME"/>
+                          <xs:element type="mdm:NonEmptyString" name="OPERATING_UNIT"/>
+                          <xs:element type="xs:string" name="BILL_TO_FLAG"/>
+                          <xs:element type="xs:string" name="SHIP_TO_FLAG"/>
+                          <xs:element type="xs:string" name="ADDRESS1"/>
+                          <xs:element type="xs:string" name="ADDRESS2" minOccurs="0"/>
+                          <xs:element type="xs:string" name="ADDRESS3" minOccurs="0"/>
+                          <xs:element type="mdm:NonEmptyString" name="POSTAL_CODE" minOccurs="0"/>
+                          <xs:element type="xs:string" name="CITY" minOccurs="0"/>
+                          <xs:element type="mdm:NonEmptyString" name="COUNTY" minOccurs="0"/>
+                          <xs:element type="xs:string" name="COUNTRY"/>                          
+                          <xs:element type="xs:string" name="EMAIL" minOccurs="0"/>
+                          <xs:element type="xs:string" name="PHONE" minOccurs="0"/>
+                          <xs:element type="xs:string" name="SCHEDULE_GROUP"/>                       
+                          <xs:element type="xs:string" name="SITE_KEY"/>
+                          <xs:element type="mdm:CrossRefType" name="CrossRef" minOccurs="0" maxOccurs="unbounded"/>
+                          <xs:element name="CUSTOMER_SITE_USE" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element type="mdm:NonEmptyString" name="SITE_USE_ID"/>
+                                <xs:element type="xs:string" name="CUST_ACCT_SITE_ID"/>
+                                <xs:element type="mdm:NonEmptyString" name="SITE_USE_CODE"/>
+                                <xs:element type="xs:string" name="SITE_USE_KEY"/>
+                                <xs:element type="xs:string" name="SITE_PRIMARY_FLAG"/>
+                                <xs:element type="mdm:NonEmptyString" name="SITE_CODE"/>
+                                <xs:element type="xs:string" name="PRIMARY_RECEIPT_METHOD" minOccurs="0"/>
+                                <xs:element type="xs:string" name="PAYMENT_TERM" minOccurs="0"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:simpleType name="NonEmptyString">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1"/>
+    </xs:restriction>
+  </xs:simpleType>
+  
+  <xs:complexType name="CrossRefType">
+   <xs:sequence>
+     <xs:element name="systemName" type="mdm:NonEmptyString"/>
+     <xs:element name="systemRef" type="mdm:NonEmptyString"/>
+   </xs:sequence>
+  </xs:complexType>
+</xs:schema>

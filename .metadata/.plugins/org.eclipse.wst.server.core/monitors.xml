@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<monitors>
+  <monitor port="11733" portId="http" serverId="Oracle WebLogic Server 11gR1 (10.3.6) at [gryd2osba201.greenergy.group]" started="true"/>
+</monitors>

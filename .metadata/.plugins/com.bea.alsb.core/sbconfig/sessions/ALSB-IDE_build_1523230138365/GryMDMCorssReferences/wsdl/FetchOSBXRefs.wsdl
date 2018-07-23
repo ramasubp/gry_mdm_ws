@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/FetchOSBXRefs" name="FetchOSBXRefs-concrete" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/FetchOSBXRefs" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/FetchOSBXRefs" location="../jca/wsdl/FetchOSBXRefs_db.wsdl"/>
+  <binding name="FetchOSBXRefs_ptt-binding" type="tns:FetchOSBXRefs_ptt">
+    <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+    <operation name="FetchOSBXRefs">
+      <soap:operation soapAction="FetchOSBXRefs"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="FetchOSBXRefs-service">
+    <port name="FetchOSBXRefs-port" binding="tns:FetchOSBXRefs_ptt-binding">
+      <soap:address location="jca://eis/DB/AQDataSource"/>
+    </port>
+  </service>
+</definitions>]]></con:wsdl>
+    <con:dependencies>
+        <con:import location="../jca/wsdl/FetchOSBXRefs_db.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/FetchOSBXRefs">
+            <con:wsdl ref="GryMDMCorssReferences/jca/wsdl/FetchOSBXRefs_db"/>
+        </con:import>
+    </con:dependencies>
+    <con:targetNamespace>http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/FetchOSBXRefs</con:targetNamespace>
+</con:wsdlEntry>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:jcaEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:jca><![CDATA[<adapter-config name="GryMDMFetchXRefByMDSID" adapter="Database Adapter" wsdlLocation="wsdl/GryMDMFetchXRefByMDSID.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/AQDataSource" UIConnectionName="AQDataSource" adapterRef=""/>
+  <endpoint-interaction portType="GryMDMFetchXRefByMDSID_ptt" operation="GryMDMFetchXRefByMDSID">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select mdcr.master_data_seq       ,mdcr.ent_name       ,mdcr.sys_name       ,mdcr.target_reference       ,mdcr.created_date       ,mdcr.updated_date       ,mmd.target_alias       from  XXGRY_MDM_CROSS_REFERENCE MDCR ,XXGRY_MDM_MASTER_DATA MMD where MDCR.MASTER_DATA_SEQ = MMD.MASTER_DATA_SEQ and MDCR.MASTER_DATA_SEQ = #md_seq_id"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>]]></con:jca>
+    <con:jcaDependency>
+        <con:wsdlRef wsdlLocation="wsdl/GryMDMFetchXRefByMDSID.wsdl" ref="GryMDMCorssReferences/jca/wsdl/GryMDMFetchXRefByMDSID"/>
+    </con:jcaDependency>
+</con:jcaEntry>

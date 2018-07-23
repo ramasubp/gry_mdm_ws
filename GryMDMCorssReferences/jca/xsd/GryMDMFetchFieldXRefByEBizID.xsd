@@ -1,0 +1,29 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchFieldXRefByEBizID" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/GryMDMFetchFieldXRefByEBizID" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="GryMDMFetchFieldXRefByEBizIDInput" type="GryMDMFetchFieldXRefByEBizIDInput"/>
+   <xs:complexType name="GryMDMFetchFieldXRefByEBizIDInput">
+      <xs:sequence>
+         <xs:element name="attribute_type" type="xs:string" nillable="false"/>
+         <xs:element name="entity_name" type="xs:string" nillable="false"/>
+         <xs:element name="ebiz_ref" type="xs:string" nillable="false"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="GryMDMFetchFieldXRefByEBizIDOutputCollection" type="GryMDMFetchFieldXRefByEBizIDOutputCollection"/>
+   <xs:complexType name="GryMDMFetchFieldXRefByEBizIDOutputCollection">
+      <xs:sequence>
+         <xs:element name="GryMDMFetchFieldXRefByEBizIDOutput" type="GryMDMFetchFieldXRefByEBizIDOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="GryMDMFetchFieldXRefByEBizIDOutput">
+      <xs:sequence>
+         <xs:element name="XREF_ID" type="xs:long" nillable="false"/>
+         <xs:element name="COMMON_REF" type="xs:string" nillable="true"/>
+         <xs:element name="EBIZ" type="xs:string" nillable="true"/>
+         <xs:element name="REF_DATA" type="xs:string" nillable="true"/>
+         <xs:element name="TPT" type="xs:string" nillable="true"/>
+         <xs:element name="PORTAL" type="xs:string" nillable="true"/>
+         <xs:element name="HAL" type="xs:string" nillable="true"/>
+         <xs:element name="DYNAMICS" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

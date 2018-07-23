@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<wsdl:definitions name="GryOsbAqFaultLogging" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/AQ/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryOsbAqFaultLogging" xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/AQ/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryOsbAqFaultLogging" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:msg_out="http://www.greenergy.com/osb/log" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+  <plt:partnerLinkType name="EnqueueFaultMessage_plt">
+    <plt:role name="EnqueueFaultMessage_role">
+      <plt:portType name="tns:EnqueueFaultMessage_ptt"/>
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema xmlns="http://www.w3.org/2001/XMLSchema">
+        <import namespace="http://www.greenergy.com/osb/log" schemaLocation="../xsd/GryOsbAqFaultLogging.xsd"/>
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="GryFaultMessage_msg">
+        <wsdl:part name="GryFaultMessage" element="msg_out:GryFaultMessage"/>
+    </wsdl:message>
+    <wsdl:portType name="EnqueueFaultMessage_ptt">
+        <wsdl:operation name="EnqueueFaultMessage">
+            <wsdl:input message="tns:GryFaultMessage_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>]]></con:wsdl>
+    <con:dependencies>
+        <con:schemaRef isInclude="false" schemaLocation="../xsd/GryOsbAqFaultLogging.xsd" namespace="http://www.greenergy.com/osb/log" ref="GreenergyOSBLoggingMechanism/jca/xsd/GryOsbAqFaultLogging"/>
+    </con:dependencies>
+    <con:targetNamespace>http://xmlns.oracle.com/pcbpel/adapter/AQ/GryOsbAqAdaptersApp/GryOsbAqAdapters/GryOsbAqFaultLogging</con:targetNamespace>
+</con:wsdlEntry>

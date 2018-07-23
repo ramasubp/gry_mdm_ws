@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:schemaEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:schema><![CDATA[<schema targetNamespace="http://greenergy.com/OFM/GryOFMLogger"
+	xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<element name="GryOFMLogger">
+		<complexType>
+			<sequence>
+			
+			
+			
+				<!--BUSINESS PROCESS -->
+				<element name="FlowID">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1" />
+						</restriction>
+					</simpleType>
+				</element>
+				<!--Should be used to capture Instance ID in OSB/SOA/BPM. Flow ID is 
+					used looking forward to 12c compatibilty -->
+				<element name="ComponentInstanceID" type="string" minOccurs="0"
+					nillable="true" />
+				<!--Reserved Field for 12c compatibilty, in 11g component instance ID 
+					can be used, as of now this field can be ignored -->
+				<element name="TransactionID">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1" />
+						</restriction>
+					</simpleType>
+				</element>				
+				<!-- Field which uniquely identifies the Business Process -->
+				<element name="ApplicationName">
+					<simpleType>
+						<restriction base="string">
+							<minLength value="1" />
+						</restriction>
+					</simpleType>
+				</element>
+				<!-- Name of the Application e.g. Liftings, G2G -->
+				<!-- BUSINESS PROCESS END -->
+
+
+
+				<!--BUSINESS PROCESS STATUS -->
+				<element name="LoggerDateTime" type="dateTime" minOccurs="0"
+					nillable="true" />
+				<element name="ProcessStatus">
+					<!-- Status of business process -->
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="Started" />
+							<enumeration value="Processing" />
+							<enumeration value="Completed" />
+							<enumeration value="Faulted" />
+							<enumeration value="Discarded" />
+						</restriction>
+					</simpleType>
+				</element>
+				<element name="DisplayMessage" type="string" minOccurs="0"
+					nillable="true" />
+				<!-- To be used in conjunction with ProcessStatus Field to provide application 
+					specific information eg1. if ProcessStatus='Faulted' then this field can 
+					have fault discription eg2. if ProcessStatus='Completed' and Application 
+					Name ="Liftings" then this filed can have a application specific message 
+					like Delivered to Invoice Service -->
+				<!--BUSINESS PROCESS STATUS END -->
+
+
+
+				<!-- INFRASTRUCTURE DETAILS -->
+				<!-- This details would be automatically populated by the logging framework 
+					except for Platform field -->
+				<element name="HostServerName" type="string" minOccurs="0"
+					nillable="true" />
+				<!-- gryd2osba201.greenergy.group -->
+				<element name="ManagedServerName" type="string" minOccurs="0"
+					nillable="true" />
+				<!-- osb_server1 or soa_server1 -->
+				<element name="DomainName" type="string" minOccurs="0"
+					nillable="true" />
+				<!--osb_domain, soa_domian -->
+				<element name="Platform" default="OSB" minOccurs="0"
+					nillable="true">
+					<simpleType>
+						<restriction base="string">
+							<enumeration value="OSB" />
+							<enumeration value="SOA" />
+							<enumeration value="BPM" />
+						</restriction>
+					</simpleType>
+				</element>
+
+				<!-- SOA / OSB / BPM -->
+				<!-- INFRASTRUCTURE DETAILS END -->
+
+
+
+				<!-- MESSAGE -->
+				<element name="Source" type="string" />
+				<!-- eg File,Email, Terminal,System Name -->
+				<element name="Destination" type="string" />
+				<!-- database,invoice system -->
+				<element name="Payload" type="string" minOccurs="0"
+					nillable="true" />
+				<!-- Complete XML Payload of the business process -->
+				<element name="Headers" type="string" minOccurs="0"
+					nillable="true" />
+				<!-- Message Headers if any -->
+				<!-- MESSAGE -->
+
+
+
+				<!-- DATA -->
+				<!-- Value of elements which uniquely identifies the payload or which 
+					is required for the monitoring purpose -->
+				<element name="Key" type="string" minOccurs="0" nillable="true" />
+				<element name="CustomField1" type="string" minOccurs="0"
+					nillable="true" />
+				<element name="CustomField2" type="string" minOccurs="0"
+					nillable="true" />
+				<element name="CustomField3" type="string" minOccurs="0"
+					nillable="true" />
+				<element name="CustomField4" type="string" minOccurs="0"
+					nillable="true" />
+				<element name="CustomField5" type="string" minOccurs="0"
+					nillable="true" />
+				<!-- DATA END -->
+				
+				
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>]]></con:schema>
+    <con:targetNamespace>http://greenergy.com/OFM/GryOFMLogger</con:targetNamespace>
+</con:schemaEntry>

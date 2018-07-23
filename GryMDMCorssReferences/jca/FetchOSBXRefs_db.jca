@@ -1,0 +1,14 @@
+<adapter-config name="FetchOSBXRefs" adapter="Database Adapter" wsdlLocation="wsdl/FetchOSBXRefs_db.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/AQDataSource" UIConnectionName="AQ_OSB_PPR" adapterRef=""/>
+  <endpoint-interaction portType="FetchOSBXRefs_ptt" operation="FetchOSBXRefs">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="AQ_OSB"/>
+      <property name="PackageName" value="WRAPPER_FETCHOSBXREFS"/>
+      <property name="ProcedureName" value="XXGRY_MDM_CROSSREFERENCE$XXGR"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

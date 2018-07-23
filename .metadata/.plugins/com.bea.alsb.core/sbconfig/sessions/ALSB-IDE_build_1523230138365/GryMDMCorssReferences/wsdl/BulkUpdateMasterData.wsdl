@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:wsdlEntry xmlns:con="http://www.bea.com/wli/sb/resources/config">
+    <con:wsdl><![CDATA[<definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/BulkUpdateMasterData" name="BulkUpdateMasterData-concrete" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/BulkUpdateMasterData" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/BulkUpdateMasterData" location="../jca/wsdl/BulkUpdateMasterData_db.wsdl"/>
+  <binding name="BulkUpdateMasterData_ptt-binding" type="tns:BulkUpdateMasterData_ptt">
+    <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+    <operation name="BulkUpdateMasterData">
+      <soap:operation soapAction="BulkUpdateMasterData"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+  </binding>
+  <service name="BulkUpdateMasterData-service">
+    <port name="BulkUpdateMasterData-port" binding="tns:BulkUpdateMasterData_ptt-binding">
+      <soap:address location="jca://eis/DB/AQDataSource"/>
+    </port>
+  </service>
+</definitions>]]></con:wsdl>
+    <con:dependencies>
+        <con:import location="../jca/wsdl/BulkUpdateMasterData_db.wsdl" namespace="http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/BulkUpdateMasterData">
+            <con:wsdl ref="GryMDMCorssReferences/jca/wsdl/BulkUpdateMasterData_db"/>
+        </con:import>
+    </con:dependencies>
+    <con:targetNamespace>http://xmlns.oracle.com/pcbpel/adapter/db/MDMApplication/MDMTransformationProject/BulkUpdateMasterData</con:targetNamespace>
+</con:wsdlEntry>

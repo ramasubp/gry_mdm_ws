@@ -1,0 +1,17 @@
+<definitions targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Liftings/LiftingByComponents-Toronto/Insert_Into_OFM_Log" name="Insert_Into_OFM_Log-concrete" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Liftings/LiftingByComponents-Toronto/Insert_Into_OFM_Log" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/Liftings/LiftingByComponents-Toronto/Insert_Into_OFM_Log" location="Insert_Into_OFM_Log.wsdl"/>
+  <binding name="Insert_Into_OFM_Log_ptt-binding" type="tns:Insert_Into_OFM_Log_ptt">
+    <soap:binding style="document" transport="http://www.bea.com/wli/sb/transports/jca"/>
+    <operation name="Insert_Into_OFM_Log">
+      <soap:operation soapAction="Insert_Into_OFM_Log"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+    </operation>
+  </binding>
+  <service name="Insert_Into_OFM_Log-service">
+    <port name="Insert_Into_OFM_Log-port" binding="tns:Insert_Into_OFM_Log_ptt-binding">
+      <soap:address location="jca://eis/DB/AQDataSource"/>
+    </port>
+  </service>
+</definitions>

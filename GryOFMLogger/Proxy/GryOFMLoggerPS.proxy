@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml-fragment xmlns:ser="http://www.bea.com/wli/sb/services" xmlns:tran="http://www.bea.com/wli/sb/transports" xmlns:env="http://www.bea.com/wli/config/env" xmlns:http="http://www.bea.com/wli/sb/transports/http" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://www.bea.com/wli/sb/pipeline/config" xmlns:con1="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con2="http://www.bea.com/wli/sb/stages/config" xmlns:con3="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/routing/config">
+  <ser:coreEntry isProxy="true" isEnabled="true" isTracingEnabled="false">
+    <ser:binding type="Mixed" xsi:type="con:MixedBindingType" xmlns:con="http://www.bea.com/wli/sb/services/bindings/config">
+      <con:request type="XML">
+        <con3:schema ref="GryOFMLogger/xsd/GryOFMLogger" element="GryOFMLogger"/>
+      </con:request>
+    </ser:binding>
+    <ser:monitoring isEnabled="false">
+      <ser:aggregationInterval>10</ser:aggregationInterval>
+      <ser:pipelineMonitoringLevel>Pipeline</ser:pipelineMonitoringLevel>
+    </ser:monitoring>
+    <ser:reporting>true</ser:reporting>
+    <ser:logging isEnabled="true">
+      <ser:logLevel>debug</ser:logLevel>
+    </ser:logging>
+    <ser:sla-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:sla-alerting>
+    <ser:pipeline-alerting isEnabled="true">
+      <ser:alertLevel>normal</ser:alertLevel>
+    </ser:pipeline-alerting>
+  </ser:coreEntry>
+  <ser:endpointConfig>
+    <tran:provider-id>http</tran:provider-id>
+    <tran:inbound>true</tran:inbound>
+    <tran:URI>
+      <env:value>/GRYOFMLogger/Proxy/GryOFMLoggerPS</env:value>
+    </tran:URI>
+    <tran:inbound-properties/>
+    <tran:all-headers>false</tran:all-headers>
+    <tran:provider-specific>
+      <http:inbound-properties/>
+    </tran:provider-specific>
+  </ser:endpointConfig>
+  <ser:router errorHandler="_onErrorHandler-1059623894237843199--24bae684.157d270813f.-7f60">
+    <con:pipeline type="request" name="PipelinePairNode1_request">
+      <con:stage name="InitializationStage">
+        <con:context>
+          <con2:varNsDecl namespace="http://greenergy.com/OFM/GryOFMLogger" prefix="gry"/>
+        </con:context>
+        <con:actions>
+          <con1:assign varName="GryOFMLoggerDocument">
+            <con2:id>_ActionId-1059623894237843199--24bae684.157d270813f.-7e62</con2:id>
+            <con1:expr>
+              <con2:xqueryText>$body</con2:xqueryText>
+            </con1:expr>
+          </con1:assign>
+          <con1:javaCallout varName="ManagedServerName">
+            <con2:id>_ActionId-5702573442373932709-1f4b41ef.157fb175f9e.-7ff3</con2:id>
+            <con1:archive ref="GryOFMLogger/Resource/GryOSBLogger"/>
+            <con1:className>GRYOSBLogger.GRYOSBLogger</con1:className>
+            <con1:method>public static java.lang.String findManagedServerName()</con1:method>
+          </con1:javaCallout>
+          <con1:javaCallout varName="DomainName">
+            <con2:id>_ActionId-5702573442373932709-1f4b41ef.157fb175f9e.-7fef</con2:id>
+            <con1:archive ref="GryOFMLogger/Resource/GryOSBLogger"/>
+            <con1:className>GRYOSBLogger.GRYOSBLogger</con1:className>
+            <con1:method>public static java.lang.String findDomainName()</con1:method>
+          </con1:javaCallout>
+          <con1:javaCallout varName="HostName">
+            <con2:id>_ActionId-5702573442373932709-1f4b41ef.157fb175f9e.-7feb</con2:id>
+            <con1:archive ref="GryOFMLogger/Resource/GryOSBLogger"/>
+            <con1:className>GRYOSBLogger.GRYOSBLogger</con1:className>
+            <con1:method>public static java.lang.String findHostName()</con1:method>
+          </con1:javaCallout>
+          <con1:replace varName="body">
+            <con2:id>_ActionId-89846685510170665-44d2974c.15866ca7e9d.-7f7f</con2:id>
+            <con1:location>
+              <con2:xpathText>./gry:GryOFMLogger</con2:xpathText>
+            </con1:location>
+            <con1:expr>
+              <con2:xqueryTransform>
+                <con2:resource ref="GryOFMLogger/transformation/EmptyTransformation"/>
+                <con2:param name="gryOFMLogger1">
+                  <con2:path>$body/gry:GryOFMLogger</con2:path>
+                </con2:param>
+                <con2:param name="HostName">
+                  <con2:path>$HostName</con2:path>
+                </con2:param>
+                <con2:param name="ManagedServerName">
+                  <con2:path>$ManagedServerName</con2:path>
+                </con2:param>
+                <con2:param name="DomainName">
+                  <con2:path>$DomainName</con2:path>
+                </con2:param>
+              </con2:xqueryTransform>
+            </con1:expr>
+          </con1:replace>
+        </con:actions>
+      </con:stage>
+      <con:stage name="ValidationStage">
+        <con:context>
+          <con2:varNsDecl namespace="http://greenergy.com/OFM/GryOFMLogger" prefix="gry"/>
+        </con:context>
+        <con:actions>
+          <con1:validate>
+            <con2:id>_ActionId-5702573442373932709-1f4b41ef.157fb175f9e.-7f59</con2:id>
+            <con1:schema ref="GryOFMLogger/xsd/GryOFMLogger"/>
+            <con1:schemaElement xmlns:gry="http://greenergy.com/OFM/GryOFMLogger">gry:GryOFMLogger</con1:schemaElement>
+            <con1:varName>body</con1:varName>
+            <con1:location>
+              <con2:xpathText>./gry:GryOFMLogger</con2:xpathText>
+            </con1:location>
+          </con1:validate>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:pipeline type="response" name="PipelinePairNode1_response"/>
+    <con:pipeline type="error" name="_onErrorHandler-1059623894237843199--24bae684.157d270813f.-7f60">
+      <con:stage name="ErrorStage">
+        <con:context>
+          <con2:userNsDecl namespace="http://www.greenergy.com/osb/log" prefix="gry"/>
+        </con:context>
+        <con:actions>
+          <con4:replace varName="body" contents-only="true" xmlns:con1="http://www.bea.com/wli/sb/pipeline/config" xmlns:con="http://www.bea.com/wli/sb/typesystem/config" xmlns:file="http://www.bea.com/wli/sb/transports/file" xmlns:con4="http://www.bea.com/wli/sb/stages/transform/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con2="http://www.bea.com/wli/sb/stages/routing/config" xmlns:con3="http://www.bea.com/wli/sb/stages/config">
+            <con3:id>_ActionId-1059623894237843199--24bae684.157d270813f.-7e78</con3:id>
+            <con4:location>
+              <con3:xpathText>.</con3:xpathText>
+            </con4:location>
+            <con4:expr>
+              <con3:xqueryText><![CDATA[<gry:GryFaultMessage>
+  <gry:gryFaultSummary>
+    <gry:schemaVersion>1.0</gry:schemaVersion>
+    <gry:faultTitle>GRY OFM Logger Failure</gry:faultTitle>
+    <gry:faultOwner>LOG</gry:faultOwner>
+    <gry:queueName></gry:queueName>
+    <gry:messageId></gry:messageId>
+    <gry:correlationId></gry:correlationId>
+    <gry:publishedAt>{fn:current-dateTime()}</gry:publishedAt>
+    <gry:supportOperation></gry:supportOperation>
+   <gry:attributes>
+      <gry:tokens>
+        <gry:token1></gry:token1>
+        <gry:token2></gry:token2>
+        <gry:token3></gry:token3>
+        <gry:token4></gry:token4>
+        <gry:token5></gry:token5>
+        <gry:token6></gry:token6>
+      </gry:tokens>
+      <gry:values>
+        <gry:value1></gry:value1>
+        <gry:value2></gry:value2>
+        <gry:value3></gry:value3>
+        <gry:value4></gry:value4>
+        <gry:value5></gry:value5>
+        <gry:value6></gry:value6>
+      </gry:values>
+    </gry:attributes>
+  </gry:gryFaultSummary>
+  <gry:gryAttachments></gry:gryAttachments>  
+  <gry:gryBodyFragments>
+      <gry:fragmentTokens>
+        <gry:token1>GRY OFM Logger</gry:token1>
+        <gry:token2></gry:token2>
+        <gry:token3></gry:token3>
+        <gry:token4></gry:token4>      
+      </gry:fragmentTokens>  
+      <gry:fragments> 
+        <gry:fragment1>{$GryOFMLoggerDocument}</gry:fragment1>
+        <gry:fragment2></gry:fragment2>
+        <gry:fragment3></gry:fragment3>
+        <gry:fragment4></gry:fragment4>         
+      </gry:fragments>          
+  </gry:gryBodyFragments>          
+  <gry:gryFault>{$fault}</gry:gryFault>            
+  <gry:gryInbound>{$inbound}</gry:gryInbound>   
+  <gry:gryOutbound>{$outbound}</gry:gryOutbound>      
+</gry:GryFaultMessage>]]></con3:xqueryText>
+            </con4:expr>
+          </con4:replace>
+          <con3:route xmlns:ema="http://www.bea.com/wli/sb/transports/email" xmlns:con6="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/publish/config">
+            <con2:id>_ActionId-1059623894237843199--24bae684.157d270813f.-7eef</con2:id>
+            <con3:service ref="GreenergyOSBLoggingMechanism/proxy/GryLogFaultAdminNtfy" xsi:type="ref:ProxyRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con3:operation>EnqueueFaultMessage</con3:operation>
+            <con3:outboundTransform>
+              <con5:delete varName="attachments" xmlns:con5="http://www.bea.com/wli/sb/stages/transform/config">
+                <con2:id>_ActionId-1059623894237843199--24bae684.157d270813f.-7eee</con2:id>
+              </con5:delete>
+            </con3:outboundTransform>
+          </con3:route>
+          <con2:reply isError="true" xmlns:ema="http://www.bea.com/wli/sb/transports/email" xmlns:con6="http://www.bea.com/wli/sb/typesystem/config" xmlns:con4="http://www.bea.com/wli/sb/stages/logging/config" xmlns:con5="http://www.bea.com/wli/sb/stages/publish/config" xmlns:con3="http://www.bea.com/wli/sb/stages/routing/config">
+            <con2:id>_ActionId-1059623894237843199--24bae684.157d270813f.-7eb3</con2:id>
+          </con2:reply>
+        </con:actions>
+      </con:stage>
+    </con:pipeline>
+    <con:flow>
+      <con:pipeline-node name="PipelinePairNode1">
+        <con:request>PipelinePairNode1_request</con:request>
+        <con:response>PipelinePairNode1_response</con:response>
+      </con:pipeline-node>
+      <con:route-node name="JMSEnqueue">
+        <con:context/>
+        <con:actions>
+          <con4:route>
+            <con2:id>_ActionId-1059623894237843199--24bae684.157d270813f.-7fd9</con2:id>
+            <con4:service ref="GryOFMLogger/Business/GryOFMLoggerJMSEnqueue" xsi:type="ref:BusinessServiceRef" xmlns:ref="http://www.bea.com/wli/sb/reference"/>
+            <con4:outboundTransform/>
+            <con4:responseTransform/>
+          </con4:route>
+        </con:actions>
+      </con:route-node>
+    </con:flow>
+  </ser:router>
+</xml-fragment>

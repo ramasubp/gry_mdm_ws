@@ -1,0 +1,10 @@
+<adapter-config name="GryOsbAqFaultLogging" adapter="AQ Adapter" wsdlLocation="wsdl/GryOsbAqFaultLogging.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/AQ/AQDataSource" UIConnectionName="AQDataSource"/>
+  <endpoint-interaction portType="EnqueueFaultMessage_ptt" operation="EnqueueFaultMessage">
+    <interaction-spec className="oracle.tip.adapter.aq.outbound.AQEnqueueInteractionSpec">
+      <property name="QueueName" value="GRY_OSB_MF_FAULT_LOGS"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

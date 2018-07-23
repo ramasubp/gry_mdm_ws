@@ -1,0 +1,14 @@
+<adapter-config name="LookUpXRefs" adapter="Database Adapter" wsdlLocation="wsdl/LookUpXRefs_db.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/AQDataSource" UIConnectionName="AQ_OSB_PPR" adapterRef=""/>
+  <endpoint-interaction portType="LookUpXRefs_ptt" operation="LookUpXRefs">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="AQ_OSB"/>
+      <property name="PackageName" value="WRAPPER_LOOKUPXREFS"/>
+      <property name="ProcedureName" value="XXGRY_MDM_CROSSREFERENCE$XXGR"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

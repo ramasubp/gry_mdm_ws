@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<wsdl:definitions
+     name="GryMDMCustomer"
+     targetNamespace="http://schema.greenergy.com/MDM/Customer/GryMDMCustomer"
+     xmlns:ns1="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://schema.greenergy.com/MDM/Customer/GryMDMCustomer"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://schema.greenergy.com/ApplicationObjects/Ebiz/ABO/AR/Customer"
+                 schemaLocation="../xsd/GryEbizCustomer.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="GryMDMCustomerRequestMessage">
+        <wsdl:part name="payload" element="ns1:MASTERDATA_CUSTOMER"/>
+    </wsdl:message>
+    <wsdl:portType name="GryMDMCustomer">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:GryMDMCustomerRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="GryMDMCustomerBinding" type="client:GryMDMCustomer">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="process">
+            <soap:operation style="document" soapAction="process"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="grymdmcustomer_client_ep">
+        <wsdl:port name="GryMDMCustomer_pt" binding="client:GryMDMCustomerBinding">
+            <soap:address location="http://gryd2soaa200.greenergy.group:8001/soa-infra/services/default/Project1/grymdmcustomer_client_ep"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions name="RefDataService"
+	targetNamespace="http://schema.greenergy.com/Billing/RefData"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy"
+	xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schema.greenergy.com/Billing/RefData"
+	xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:i0="http://schema.greenergy.com/ABCS/Billing/RefData"
+	xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
+	xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<wsdl:types>
+		<xs:schema elementFormDefault="qualified"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:import namespace="http://schema.greenergy.com/Billing/RefData/Client" />
+			<xs:import
+				namespace="http://schema.greenergy.com/Billing/RefData/InsertClientResponse" />
+			<xs:element name="PutClient" type="q1:PutClient"
+				xmlns:q1="http://schema.greenergy.com/Billing/RefData/Client" />
+			<xs:element name="PutClientResponse" type="q2:PutClientResponse"
+				xmlns:q2="http://schema.greenergy.com/Billing/RefData/InsertClientResponse" />
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/Billing/RefData/Client"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schema.greenergy.com/Billing/RefData/Client">
+			<xs:import namespace="http://schema.greenergy.com/Billing/RefData/ClientSite" />
+			<xs:complexType name="PutClient">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="Clients" nillable="true" type="tns:Clients" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Clients">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+						name="Client" nillable="true" type="tns:Client" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Client">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="GreenergySystemName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ReferencedName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ReferencedId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+						name="ClientSite" nillable="true" type="q1:ClientSite"
+						xmlns:q1="http://schema.greenergy.com/Billing/RefData/ClientSite" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/Billing/RefData/ClientSite"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schema.greenergy.com/Billing/RefData/ClientSite">
+			<xs:complexType name="ClientSite">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientSiteId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="OrgName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientSiteUseGroup" nillable="true" type="tns:ClientSiteUseGroup" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ClientSiteUseGroup">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+						name="ClientSiteUse" nillable="true" type="tns:ClientSiteUse" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ClientSiteUse">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientSiteUseId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="SiteUseCode" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="SiteCode" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="clientSiteUseGroup">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+						name="ClientSiteUse" nillable="true" type="tns:clientSiteUse" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="clientSiteUse">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientSiteUseId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="SiteUseCode" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="SiteCode" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/Billing/RefData/InsertClientResponse"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schema.greenergy.com/Billing/RefData/InsertClientResponse">
+			<xs:import
+				namespace="http://schema.greenergy.com/Billing/RefData/InsertClientSiteResponse" />
+			<xs:import namespace="http://schema.greenergy.com/Billing/RefData/" />
+			<xs:complexType name="PutClientResponse">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="Clients" nillable="true" type="tns:clients" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="clients">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+						name="Client" nillable="true" type="tns:client" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="Message" nillable="true" type="q1:Message"
+						xmlns:q1="http://schema.greenergy.com/Billing/RefData/" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="client">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="GreenergySystemName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ReferencedName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ReferencedId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified"
+						name="ClientSite" nillable="true" type="q2:clientSite"
+						xmlns:q2="http://schema.greenergy.com/Billing/RefData/InsertClientSiteResponse" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/Billing/RefData/InsertClientSiteResponse"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema"
+			xmlns:tns="http://schema.greenergy.com/Billing/RefData/InsertClientSiteResponse">
+			<xs:import namespace="http://schema.greenergy.com/Billing/RefData/ClientSite" />
+			<xs:complexType name="clientSite">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientSiteId" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="OrgName" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="ClientSiteUseGroup" nillable="true" type="q1:clientSiteUseGroup"
+						xmlns:q1="http://schema.greenergy.com/Billing/RefData/ClientSite" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/Billing/RefData/"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schema.greenergy.com/Billing/RefData/">
+			<xs:complexType name="Message">
+				<xs:sequence>
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="Status" nillable="true" type="xs:string" />
+					<xs:element minOccurs="1" maxOccurs="1" form="unqualified"
+						name="StatusMessage" nillable="true" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema elementFormDefault="qualified"
+			targetNamespace="http://schema.greenergy.com/Billing/RefData"
+			xmlns:xs="http://www.w3.org/2001/XMLSchema">
+			<xs:element name="SelectClientRefData">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="1" name="Client"
+							type="tns:SelectClientRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="SelectClientRequest">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+						name="ClientId" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+						name="GreenergySystemName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+						name="ReferencedName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" form="unqualified"
+						name="ReferencedId" type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="SelectClientRefDataResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="1"
+							name="SelectClientRefDataResult" type="tns:SelectClientResponse" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="SelectClientResponse">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="Client"
+						type="tns:ArrayOfSelectClient" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ArrayOfSelectClient">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="SelectClient"
+						nillable="true" type="tns:SelectClient" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SelectClient">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ClientId"
+						type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1"
+						name="GreenergySystemName" type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReferencedName"
+						type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ReferencedId"
+						type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="ClientSite"
+						type="tns:ArrayOfSelectClientSite" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ArrayOfSelectClientSite">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="SelectClientSite"
+						nillable="true" type="tns:SelectClientSite" />
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SelectClientSite">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="1" name="ClientSiteId"
+						type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="PartyName"
+						type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="SiteCode"
+						type="xs:string" />
+					<xs:element minOccurs="0" maxOccurs="1" name="SiteUseCode"
+						type="xs:string" />
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="InsertClient">
+		<wsdl:part name="PutClient" element="PutClient" />
+	</wsdl:message>
+	<wsdl:message name="InsertClientResponse">
+		<wsdl:part name="PutClientResponse" element="PutClientResponse" />
+	</wsdl:message>
+	<wsdl:message name="IRefDataService_SelectClientRefData_InputMessage">
+		<wsdl:part name="parameters" element="tns:SelectClientRefData" />
+	</wsdl:message>
+	<wsdl:message name="IRefDataService_SelectClientRefData_OutputMessage">
+		<wsdl:part name="parameters" element="tns:SelectClientRefDataResponse" />
+	</wsdl:message>
+	<wsdl:portType name="IRefDataService">
+		<wsdl:operation name="InsertClientRefData">
+			<wsdl:input
+				wsaw:Action="http://schema.greenergy.com/Billing/RefData/InsertClientRefData"
+				name="InsertClient" message="tns:InsertClient" />
+			<wsdl:output
+				wsaw:Action="http://schema.greenergy.com/Billing/RefData/IRefDataService/InsertClientRefDataResponse"
+				name="InsertClientResponse" message="tns:InsertClientResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="SelectClientRefData">
+			<wsdl:input
+				wsaw:Action="http://schema.greenergy.com/Billing/RefData/SelectClientRefData"
+				message="tns:IRefDataService_SelectClientRefData_InputMessage" />
+			<wsdl:output
+				wsaw:Action="http://schema.greenergy.com/Billing/RefData/IRefDataService/SelectClientRefDataResponse"
+				message="tns:IRefDataService_SelectClientRefData_OutputMessage" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BasicHttpBinding_IRefDataService"
+		type="tns:IRefDataService">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="InsertClientRefData">
+			<soap:operation
+				soapAction="http://schema.greenergy.com/Billing/RefData/InsertClientRefData"
+				style="document" />
+			<wsdl:input name="InsertClient">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="InsertClientResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="SelectClientRefData">
+			<soap:operation
+				soapAction="http://schema.greenergy.com/Billing/RefData/SelectClientRefData"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="RefDataService">
+		<wsdl:port name="BasicHttpBinding_IRefDataService" binding="tns:BasicHttpBinding_IRefDataService">
+			<soap:address
+				location="http://gry74app13.greenergy.group/RefDataServices/RefDataService.svc" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

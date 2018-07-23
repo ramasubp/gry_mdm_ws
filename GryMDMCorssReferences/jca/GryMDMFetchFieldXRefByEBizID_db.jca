@@ -1,0 +1,13 @@
+<adapter-config name="GryMDMFetchFieldXRefByEBizID" adapter="Database Adapter" wsdlLocation="wsdl/GryMDMFetchFieldXRefByEBizID.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/AQDataSource" UIConnectionName="AQDataSource" adapterRef=""/>
+  <endpoint-interaction portType="GryMDMFetchFieldXRefByEBizID_ptt" operation="GryMDMFetchFieldXRefByEBizID">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="select XREF_ID       ,COMMON_REF       ,EBIZ       ,REF_DATA       ,TPT       ,PORTAL       ,HAL       ,DYNAMICS from GRY_MDM_FIELD_XREF  where ATTRIBUTE_TYPE = #attribute_type and ENTITY_NAME = #entity_name and EBIZ = #ebiz_ref"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>
